@@ -11,12 +11,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome to signup page!</h1>
-    <form action="/user" method="post">
-        <label>Full Name :</label>
-        <input type="text" name="name" placeholder="John Doe" required>
-
-        <br><br>
+    <h1>Welcome to Login Page!</h1>
+    <form action = "/user/login" method="post">
 
         <label>Email :</label>
         <input type="text" name="email" placeholder="abc@gmail.com" required>
@@ -28,11 +24,13 @@
 
         <br><br>
         
-        <button type="submit">Submit</button> 
+        <button type="submit">Login</button>
+
+        <br><br>
+        
+        <div>
+            <p>Already have an account ? <a href="/signup">Signup</a></p>
+        </div>
     </form>
-    <br><br>
-    <div>
-        <p>Already have an account ? <a href="/login">Login</a></p>
-    </div>
 </body>
 </html>

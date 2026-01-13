@@ -1,7 +1,8 @@
 const express = require("express")
 const path = require('path')
-
+const cookieParser = require('cookie-parser')
 const {connectToMongoDB} = require('./config/connectDB');
+const {restrictToLoggedinUserOnly} = require('./Middleware/auth');
 
 const urlRoutes = require('./routes/url');
 const staticRoutes = require('./routes/staticRouter');
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
+app.use(cookieParser());
 
 app.set("view engine","ejs");
 app.set("views",path.resolve("./views"));
@@ -21,7 +23,7 @@ connectToMongoDB("mongodb://localhost:27017/url-shortner")
 
 const PORT = 8001;
 
-app.use('/url',urlRoutes);
+app.use('/url',restrictToLoggedinUserOnly, urlRoutes);
 app.use('/user',userRoutes);
 app.use('/',staticRoutes);
 
