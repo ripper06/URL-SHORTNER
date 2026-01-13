@@ -1,0 +1,32 @@
+//To hand server side ui rendering we have some template engines
+//like : EJS, handlebars, pug
+
+//Authentication
+
+//Stateful Auth-  
+
+ CLIENT    -------username/password------------> SERVER
+uid: 367   <----------session uid---------------
+
+(Client login with uname ans password server matches it and generate an unique user id for client)
+(That uid is stored in server)
+(Then that uid is sent to client as response)
+
+CLIENT  ---------- GET/users | uid : 367 -------> SERVER
+        <---------- response : all users --------
+(For next req client sent that uid with subsequent request)
+(Server validate that uid if that exists and eligible to have access)
+(On sucessful validation and authorisation res is sent)
+
+How uid is sent from client to server ?
+1- Cookies - EJS(Browsers)
+2- response
+3- Headers - REST API
+
+EXPRESS FLOW :
+
+CLIENT-------->AUTH MIDDLEWARE--------->END POINT ROUTE
+
+AUTH MIDDLEWARE - chexks for cookie value or uid, if valid calls next() else reject the request
+
+//Stateless -  
