@@ -2,7 +2,7 @@ const express = require("express")
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const {connectToMongoDB} = require('./config/connectDB');
-const {restrictToLoggedinUserOnly} = require('./Middleware/auth');
+const {restrictToLoggedinUserOnly,checkAuth} = require('./Middleware/auth');
 
 const urlRoutes = require('./routes/url');
 const staticRoutes = require('./routes/staticRouter');
@@ -24,8 +24,8 @@ connectToMongoDB("mongodb://localhost:27017/url-shortner")
 const PORT = 8001;
 
 app.use('/url',restrictToLoggedinUserOnly, urlRoutes);
-app.use('/user',userRoutes);
-app.use('/',staticRoutes);
+app.use('/user',checkAuth, userRoutes);
+app.use('/',checkAuth, staticRoutes);
 
 app.listen(PORT,()=>{
     console.log(`Server started on port : ${PORT}`);

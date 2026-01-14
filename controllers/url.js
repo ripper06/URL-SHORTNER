@@ -3,6 +3,7 @@ const URL = require('../models/url');
 
 async function handleGenerateNewShortUrl(req,res){
     const data = req.body;
+
     if(!data.url) return res.status(400).json({
          error : 'true',
          message : "url is required!"
@@ -13,6 +14,7 @@ async function handleGenerateNewShortUrl(req,res){
         shortId : shortID,
         redirectURL : data.url,
         visitHistory : [],
+        createdBy : req.user._id,
     });
 
     return res.render('home',{
